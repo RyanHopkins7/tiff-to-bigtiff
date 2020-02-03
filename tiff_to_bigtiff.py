@@ -4,12 +4,12 @@ import numpy as np
 import sys
 
 
-def tiff_to_bigtiff(tiff32_name, header_size = 8, image_size = 655654):
+def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654):
     """ Convert tiff32 to a 64 bit BigTiff file """
 
-    if tiff32_name[:-4] == '.tif':
+    if tiff32_name[-4:] == '.tif':
         extension = '.tif'
-    elif tiff32_name[:-5] == '.tiff'
+    elif tiff32_name[-5:] == '.tiff':
         extension = '.tiff'
     else:
         raise ValueError('File to convert must be a .tif or .tiff file')
@@ -25,7 +25,7 @@ def tiff_to_bigtiff(tiff32_name, header_size = 8, image_size = 655654):
         i = 0
         while tiff32.tell() < end_of_file:
             # Construct and validate each frame
-            img_data = tiff32.read(image_size)
+            img_data = tiff32.read(page_size)
             img = Image.frombytes(mode='I;16', size=(640,512), data=img_data, decoder_name='raw')
             tiff64.save(np.asarray(img))
 
