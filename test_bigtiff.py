@@ -7,8 +7,7 @@ def test_bigtiff(tiff64_name, tiff32_name, tiff32_header_size = 8, tiff32_image_
     """ Test tiff64 for equivalency to tiff32 """
     tiff64 = TiffFile(tiff64_name)
 
-    plt.imshow(tiff64.pages[10].asarray())
-    plt.show()
+    print(tiff64.pages[4].tags['StripOffsets'].value)
     
     # with open(tiff32_name, 'rb') as tiff32:
     #     tiff32.seek(0, 2)

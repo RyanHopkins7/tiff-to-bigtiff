@@ -4,10 +4,18 @@ import numpy as np
 import sys
 
 
-def tiff_to_bigtiff(file_to_convert, header_size = 8, image_size = 655654):
-    """ Convert file_to_convert to a 64 bit BigTiff file """
+def tiff_to_bigtiff(tiff32_name, header_size = 8, image_size = 655654):
+    """ Convert tiff32 to a 64 bit BigTiff file """
 
-    with open(file_to_convert, 'rb') as tiff32, TiffWriter(file_to_convert[:-5] + 'x64.tiff', bigtiff=True) as tiff64:
+    if tiff32_name[:-4] == '.tif':
+        extension = '.tif'
+    elif tiff32_name[:-5] == '.tiff'
+        extension = '.tiff'
+    else:
+        raise ValueError('File to convert must be a .tif or .tiff file')
+
+    with open(tiff32_name, 'rb') as tiff32, TiffWriter(tiff32_name[:-len(extension)] + 'x64.tiff', bigtiff=True) as tiff64:
+        
         tiff32.seek(0, 2)
         end_of_file = tiff32.tell()
 
