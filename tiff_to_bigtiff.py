@@ -7,7 +7,7 @@ import sys
 def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654, page_resolution = (640,512), page_mode = 'I;16'):
     """ 
     Convert 32 bit multipage tiff file to 64 bit multipage big tiff file.
-    This is not a general tool! It was made to convert tiff files from a specific source. See assumptions.    
+    This is not a general tool! It was made to convert tiff files from a specific source. See assumptions.  
     
     Args:
         tiff32_name (str):          The name of the tiff file to be converted if in this directory, or the path to the file.
@@ -17,7 +17,11 @@ def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654, page_resol
         page_mode (str):            The color mode of each page in the tiff file to be converted (default is 16 bit grayscale).
 
     Assumptions:
-        1. 
+        1. Image data in the tiff file to be converted is uncompressed and of constant resolution because there must be a 
+            constant number of bytes between each page.
+        2. Tiff file is of .tif or .tiff file extension.
+        3. Tiff image data is 16 bit grayscale. This script has not been tested with RGB images so performance on RGB images is unknown.
+        4. All arguments are given properly and in the correct order. Some prior analysis of the tiff file may be necessary.
     """
 
     if tiff32_name[-4:] == '.tif':
