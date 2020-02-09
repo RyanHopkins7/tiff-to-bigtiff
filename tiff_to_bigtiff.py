@@ -4,8 +4,21 @@ import numpy as np
 import sys
 
 
-def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654):
-    """ Convert tiff32 to a 64 bit BigTiff file """
+def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654, page_resolution = (640,512), page_mode = 'I;16'):
+    """ 
+    Convert 32 bit multipage tiff file to 64 bit multipage big tiff file.
+    This is not a general tool! It was made to convert tiff files from a specific source. See assumptions.    
+    
+    Args:
+        tiff32_name (str):          The name of the tiff file to be converted if in this directory, or the path to the file.
+        header_size (int):          The header size in bytes of the tiff file to be converted.
+        page_size (int):            The constant size in bytes of each page in the tiff file to be converted.
+        page_resolution (tuple):    The constant resolution of each page in the tiff file to be converted.
+        page_mode (str):            The color mode of each page in the tiff file to be converted (default is 16 bit grayscale).
+
+    Assumptions:
+        1. 
+    """
 
     if tiff32_name[-4:] == '.tif':
         extension = '.tif'
@@ -26,7 +39,7 @@ def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654):
         while tiff32.tell() < end_of_file:
             # Construct and validate each frame
             img_data = tiff32.read(page_size)
-            img = Image.frombytes(mode='I;16', size=(640,512), data=img_data, decoder_name='raw')
+            img = Image.frombytes(mode=page_mode, size=page_resolution, data=img_data, decoder_name='raw')
             tiff64.save(np.asarray(img))
 
             i += 1
@@ -40,5 +53,3 @@ def tiff_to_bigtiff(tiff32_name, header_size = 8, page_size = 655654):
 if __name__ == "__main__":
     file_to_convert = sys.argv[1]
     tiff_to_bigtiff(file_to_convert)
-
-
