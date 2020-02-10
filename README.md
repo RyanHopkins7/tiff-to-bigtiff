@@ -6,4 +6,4 @@ This is not a general tool! It was made to convert tiff files from a specific so
 Specifically, tiff files from a FLIR thermal imaging camera that are larger than 4.3 GB.
 Performance on tiff files from other sources is unknown. 
 
-
+**Usage:** `python3 tiff_to_bigtiff.py <filename.tiff>`
