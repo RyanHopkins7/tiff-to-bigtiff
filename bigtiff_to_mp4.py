@@ -14,31 +14,6 @@ def bigtiff_to_mp4(tiff64_name):
     display_min = 23500
     display_max = 24700
 
-    # fig=plt.figure(figsize=(8, 8))
-    # columns = 2
-    # rows = 2
-    # for i in range(1, columns*rows +1):
-    #     image = choice(tiff64.pages).asarray()
-    #     image.clip(display_min, display_max, out=image)
-    #     image -= display_min
-    #     np.floor_divide(image, (display_max - display_min + 1) / 256, out=image, casting='unsafe')
-
-
-    #     fig.add_subplot(rows, columns, i)
-    #     plt.tick_params(
-    #         axis='both',          
-    #         which='both',      
-    #         bottom=False,      
-    #         left=False,
-    #         right=False,
-    #         labelleft=False,
-    #         top=False,         
-    #         labelbottom=False) 
-    #     plt.imshow(image.astype('uint8'))
-    # plt.show()
-
-
-
     videodims = (640,512)
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')    
 
