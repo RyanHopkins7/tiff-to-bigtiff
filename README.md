@@ -7,3 +7,9 @@ Specifically, tiff files from a FLIR thermal imaging camera that are larger than
 Performance on tiff files from other sources is unknown. 
 
 **Usage:** `python3 tiff_to_bigtiff.py <filename.tiff>`
+
+## Installation
+
+1. Clone this repository
+2. Set up a python virtual environment in the cloned directory
+3. Install required packages using `pip install -r requirements.txt`
