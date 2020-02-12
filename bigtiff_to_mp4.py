@@ -7,7 +7,7 @@ from random import choice
 
 
 def bigtiff_to_mp4(tiff64_name):
-    """ Converts a 64 bit TIFF file to an mp4 file """
+    """ Converts a 64 bit BigTIFF file to an mp4 file. Uses halftoning to convert to 8bit grayscale. """
 
     tiff64 = TiffFile(tiff64_name)
 
@@ -21,6 +21,7 @@ def bigtiff_to_mp4(tiff64_name):
     video = cv2.VideoWriter(tiff64_name[:-5]+'.mp4' , fourcc, 30, videodims, False)
 
     for i, page in enumerate(tiff64.pages):
+        # Halftoning
         image = page.asarray()
         image.clip(display_min, display_max, out=image)
         image -= display_min
